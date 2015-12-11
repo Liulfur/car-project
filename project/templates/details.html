@@ -1,0 +1,65 @@
+{% extends "_master.html" %}
+{% block content %}
+<script type="text/javascript">
+<!--
+//Function To Display Popup
+function div_show() {
+document.getElementById('abc').style.display = "block";
+}
+//Function to Hide Popup
+function div_hide(){
+document.getElementById('abc').style.display = "none";
+}
+//-->
+</script>
+{% for car in car_details %}
+<div id="abc">
+<!-- Popup Div Starts Here -->
+<div id="popupEdit">
+<!-- Contact Us Form -->
+<form action="{{ url_for('update_car', car_id = car.car_id) }}" id="form" method="post" name="form">
+<img id="close" src="C:\Users\SFU\PycharmProjects\car-project\project\templates\close.png" height="120" width="120" onclick ="div_hide()">
+<h2>Update your Vehicle!</h2>
+<hr>
+<input id="odom" name="odom" placeholder="Odometer" type="number">
+<input id="oil" name="oil" placeholder="Oil" type="text">
+<input id="trans" name="trans" placeholder="Trans" type="text">
+<input id="brake" name="brake" placeholder="Brake" type="text">
+<br>
+<input class="button" type="submit" value="Save">
+</form>
+</div>
+<!-- Popup Div Ends Here -->
+</div>
+{% endfor %}
+<h1>Here's some information about your Ride</h1>
+<a href="{{ url_for('garage') }}"><center>Home</center></a>
+<br>
+
+<div class="datagrid">
+		<table>
+			<thead>
+				<tr>
+					<th width="150px"><strong>Odometer Reading</strong></th>
+					<th width="150px"><strong>Oil</strong></th>
+					<th width="150px"><strong>Transmission Fluid</strong></th>
+					<th width="150px"><strong>Brake Fluid</strong></th>
+					<th><strong>Actions</strong></th>
+				</tr>
+			</thead>
+			{% for car in car_details %}
+				<tr>
+					<td width="150px">{{ car.odom }}</td>
+					<td width="150px">{{ car.oil }}</td>
+					<td width="150px">{{ car.trans }}</td>
+					<td width="150px">{{ car.brake }}</td>
+					<td width="150px">
+						<button onclick="div_show()">Update</button> -
+						<a href="{{ url_for('delete_car', car_id =
+							car.car_id) }}">Delete</a> -
+					</td>
+				</tr>
+			{% endfor %}
+		</table>		
+	</div> 
+{% endblock %}

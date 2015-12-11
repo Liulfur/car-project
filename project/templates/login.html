@@ -1,0 +1,21 @@
+{% extends "_master.html" %}
+{% block content %}
+
+	<h1>Welcome to the Garage!</h1>
+	<h3>Please login to access your vehicles.</h3>
+
+	<form method="post" action="/">
+		<span>Username: <input type="text" name="username"
+			value="{{request.form.username}}"></span>
+		<br>
+		<br>
+		<span>Password: <input type="password" name="password"
+			value="{{request.form.password}}"></span>
+		<br>
+		<br>
+		<div class="center">
+		<input type="submit" value="Login">
+		</div>
+	</form>
+
+{% endblock %}
